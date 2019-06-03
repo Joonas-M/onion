@@ -10,3 +10,13 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
+\#*.clj\#
+.\#*.clj
+*.clj~
+*.cljs~
+*.cljc~
+*.edn~
+*.html~
+examples/**/target
+.rebel_readline_history
+.lein-repl-history

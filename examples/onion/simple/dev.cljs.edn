@@ -1,0 +1,2 @@
+{:main onion-simple.core
+ :optimizations :none}
