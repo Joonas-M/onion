@@ -235,3 +235,6 @@
            "use"
            "view"
            "vkern"])))
+
+(defmacro html-elements []
+  (html))
