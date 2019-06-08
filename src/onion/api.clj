@@ -1,6 +1,7 @@
 (ns onion.api
   (:require [onion.reagent.api :as reagent-api]
-            [onion.om-next.api :as om-next-api]))
+            [onion.om-next.api :as om-next-api]
+            [onion.env :as env]))
 
 #_(defmacro create-multi
   [name]
@@ -46,10 +47,10 @@
   [quo]
   `(defn ~(symbol quo)
      [& args#]
-     (cond
-       (identical? onion.core/WRAPPER_LIBRARY "reagent")  (apply (eval ~(symbol (str "reagent-" quo))) args#)
-       (identical? onion.core/WRAPPER_LIBRARY "om-next") (apply (eval ~(symbol (str "om-next-" quo))) args#)
-       (identical? onion.core/WRAPPER_LIBRARY "empty") (apply (eval ~(symbol (str "empty-" quo))) args#))))
+     (case env/WRAPPER_LIBRARY
+       "reagent"  `(apply (eval ~(symbol (str "reagent-" quo))) args#)
+       "om-next" `(apply (eval ~(symbol (str "om-next-" quo))) args#)
+       `(apply (eval ~(symbol (str "empty-" quo))) args#))))
 
 (defn- create-fns
   [sym]
@@ -57,7 +58,14 @@
      ~((eval (symbol "onion.reagent.api" sym)))
      ~((eval (symbol "onion.om-next.api" sym)))  
      (def ~(symbol (str "empty-" sym))
-        '(fn [& args]))))
+       '(fn [& args]))))
+
+(defmacro require-wrapper-library
+  []
+  (case env/WRAPPER_LIBRARY
+    "reagent" `(require 'reagent.core)
+    "om-next" `(require 'om.next)
+    nil))
 
 #_(create-multi 'render)
 (defmacro create-render []

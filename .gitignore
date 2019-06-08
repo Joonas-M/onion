@@ -10,8 +10,12 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
-\#*.clj\#
-.\#*.clj
+/**/\#*.clj\#
+/**/.\#*.clj
+/**/\#*.cljs\#
+/**/.\#*.cljs
+/**/\#*.edn\#
+/**/.\#*.edn
 *.clj~
 *.cljs~
 *.cljc~

@@ -12,11 +12,7 @@
     :om-next (require 'om.next)
     :empty "")
 
-(cond
-  (identical? o/WRAPPER_LIBRARY "reagent") '(require 'reagent.core)
-  ;(identical? o/WRAPPER_LIBRARY "om-next") '(require 'om.next)
-  (identical? o/WRAPPER_LIBRARY "empty") :empty
-  :else :foo)
+(api/require-wrapper-library)
 
 ;; (api/create-render)
 ;; (api/create-set-state!)

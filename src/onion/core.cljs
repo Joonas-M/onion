@@ -3,9 +3,9 @@
 
 (enable-console-print!)
 
-(goog-define ^string WRAPPER_LIBRARY "empty")
+;(goog-define ^string WRAPPER_LIBRARY "empty")
 
-#_(c/html-elements)
+#_(C/html-elements)
 
 ;(c/create-defelement WRAPPER_LIBRARY)
 

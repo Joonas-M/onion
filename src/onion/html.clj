@@ -1,14 +1,15 @@
 (ns onion.html
   (:require [onion.reagent.html :as r-html]
-            [clojure.string :as clj-str]))
+            [clojure.string :as clj-str]
+            [onion.env :as env]))
 
 (defn luo-elementti
   [element]
   (let [element# (symbol (clj-str/replace element #"[A-Z]" #(str "-" (clj-str/lower-case %))))]
     `(defn ~element#
        [~'attributes ~'body]
-       (cond
-         (identical? onion.core/WRAPPER_LIBRARY "reagent") ~(r-html/html element# 'attributes 'body)
+       ~(case env/WRAPPER_LIBRARY
+         "reagent" (r-html/html element# 'attributes 'body)
          :else :foo))))
 
 (defn html []
@@ -195,7 +196,7 @@
            "feTile"
            "feTurbulence"
            "filter"
-           "font"
+           ; "font" <--- Already defined
            "font-face"
            "font-face-format"
            "font-face-name"
@@ -206,7 +207,7 @@
            "glyph"
            "glyphRef"
            "hkern"
-           "image"
+           ; "image" <--- Already defined
            "line"
            "linearGradient"
            "marker"
@@ -220,16 +221,16 @@
            "polyline"
            "radialGradient"
            "rect"
-           "script"
+           ;"script" <--- Already defined
            "set"
            "stop"
-           "style"
+           ;"style" <--- Already defined
            "svg"
            "switch"
            "symbol"
            "text"
            "textPath"
-           "title"
+           ;"title" <--- Already defined
            "tref"
            "tspan"
            "use"

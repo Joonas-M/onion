@@ -1,3 +1,2 @@
 {:main reagent-simple.core
- :optimizations :none
- :closure-defines {onion.core/WRAPPER_LIBRARY "reagent"}}
+ :optimizations :none}

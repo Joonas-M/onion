@@ -1,10 +1,10 @@
 (ns onion-simple.core
   (:require [onion.core :as o]
-            [onion.api :as oapi])
+            [onion.html :as html])
   (:require-macros [onion.core :as om]))
 
 (om/defelement simple-element
-  [] nil nil
+  [] nil nil nil
   [:div "foo"]
-  #_(o/div nil
-         "foo"))
+  (html/div nil
+            "foo"))
