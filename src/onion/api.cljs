@@ -1,6 +1,7 @@
 (ns onion.api
   (:require [onion.core :as o])
-  (:require-macros [onion.api :as api]))
+  (:require-macros [onion.api :as api]
+                   [onion.core :as core]))
 
 #_(def wrapper-library (cond
                        (identical? o/WRAPPER_LIBRARY "reagent") :reagent
@@ -12,7 +13,7 @@
     :om-next (require 'om.next)
     :empty "")
 
-(api/require-wrapper-library)
+(core/require-wrapper-library)
 
 ;; (api/create-render)
 ;; (api/create-set-state!)

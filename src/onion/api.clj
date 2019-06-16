@@ -60,13 +60,6 @@
      (def ~(symbol (str "empty-" sym))
        '(fn [& args]))))
 
-(defmacro require-wrapper-library
-  []
-  (case env/WRAPPER_LIBRARY
-    "reagent" `(require 'reagent.core)
-    "om-next" `(require 'om.next)
-    nil))
-
 #_(create-multi 'render)
 (defmacro create-render []
   (create-fns "render"))
