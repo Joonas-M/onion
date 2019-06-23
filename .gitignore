@@ -21,6 +21,7 @@ pom.xml.asc
 *.cljc~
 *.edn~
 *.html~
+*.sh~
 examples/**/target
 .rebel_readline_history
 .lein-repl-history

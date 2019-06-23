@@ -1,0 +1,3 @@
+DOM_DEFS_CLJS='[onion.reagent.html]'
+WRAPPER_LIBRARY='"reagent"'
+WRAPPER_CORE_NS='[reagent.core]'
