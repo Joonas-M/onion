@@ -1,5 +1,4 @@
-(ns onion.om-next.html
-  (:require [onion.env :as env]))
+(ns onion.om-next.html)
 
 (defn html
   [element attributes body]

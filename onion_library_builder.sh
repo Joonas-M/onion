@@ -12,13 +12,13 @@ do
     mkdir -p "lib/onion_$w_l"
     cp -r src project.clj LICENSE "lib/onion_${w_l}/"
     sed -i "s/defproject onion/defproject onion-$( echo ${w_l} | sed 's/_/-/g' )/" "lib/onion_${w_l}/project.clj"
-    for w_l_n in ${wrapper_libraries[*]}
-    do
-	if [ ! "$w_l" == "$w_l_n" ];
-	then
-	    rm lib/onion_${w_l}/src/onion/${w_l_n}/*.cljs
-	fi
-    done
+    #for w_l_n in ${wrapper_libraries[*]}
+    #do
+#	if [ ! "$w_l" == "$w_l_n" ];
+#	then
+#	    rm lib/onion_${w_l}/src/onion/${w_l_n}/*.cljs
+#	fi
+#    done
 done
 
 function parse_variables () {
