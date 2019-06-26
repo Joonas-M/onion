@@ -3,12 +3,6 @@
             [onion.om-next.core :as on-core]
             [onion.env :as env]))
 
-(defmacro require-wrapper-library
-  []
-  (case env/WRAPPER_LIBRARY
-    "reagent" `(require 'reagent.core)
-    "om-next" `(require 'om.next)
-    nil))
 
 (defmulti defelement*
   (fn [wrapper-library _ _ _ _ _ _]
@@ -26,15 +20,6 @@
   [name parameters component-methods local-state lifetime-events & body]
   `(list
     ~(case env/WRAPPER_LIBRARY
-       ;; Must return nil (or just anything) after require or else, compile exception happens
-       "reagent" `(do (require '~'reagent.core)
-                      ~(defelement* :reagent name parameters component-methods local-state lifetime-events body)
-                      nil)
-       "om-next" `(do #_(require '~'[om.next]
-                                 '~'[om.dom])
-                      (require 'om.next)
-                      ~(defelement* :om-next name parameters component-methods local-state lifetime-events body)
-                      nil)
+       "reagent" (defelement* :reagent name parameters component-methods local-state lifetime-events body)
+       "om-next" (defelement* :om-next name parameters component-methods local-state lifetime-events body)
        :empty)))
-
-

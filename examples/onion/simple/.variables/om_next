@@ -1,0 +1,2 @@
+ONION_DEPENDENCY='[onion-om-next "0.1.0-SNAPSHOT"]'
+WRAPPER_CORE_NS='[om.next]'

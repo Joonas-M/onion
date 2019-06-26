@@ -1,3 +1,2 @@
-^{:watch-dirs ["src" "checkouts/onion-simple/src"]}
 {:main om-next-simple.core
  :optimizations :none}

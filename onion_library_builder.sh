@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euxo pipefail
 
-if [ -f ./lib ];
+if [ -d ./lib ];
 then
     mv lib lib_old
 fi;
@@ -41,7 +41,7 @@ function parse_variables () {
 export -f parse_variables
 find lib -type f -exec bash -c 'parse_variables "$0"' {} \;
 
-if [ -f ./lib_old ];
+if [ -d ./lib_old ];
 then
     rm -rf lib_old
 fi

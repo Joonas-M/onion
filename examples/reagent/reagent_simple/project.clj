@@ -5,8 +5,7 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [org.clojure/clojurescript "1.10.520"]
-                 [onion-simple "0.1.0-SNAPSHOT"]
-                 [onion-reagent "0.1.0-SNAPSHOT"]
+                 [onion-simple-reagent "0.1.0-SNAPSHOT"]
                  [reagent "0.8.1"]]
   :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.0"]
                                   [com.bhauman/rebel-readline-cljs "0.1.4"]]

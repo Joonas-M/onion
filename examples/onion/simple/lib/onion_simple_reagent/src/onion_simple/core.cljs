@@ -1,6 +1,6 @@
 (ns onion-simple.core
   (:require [onion.html :as html]
-            <<WRAPPER_CORE_NS>>)
+            [reagent.core])
   (:require-macros [onion.core :as om]))
 
 (om/defelement simple-element
