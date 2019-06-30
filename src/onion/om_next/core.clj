@@ -10,9 +10,10 @@
                                       lifetime-events
                                       {:component-did-mount
                                        `(fn [this]
-                                          ('om.next/react-set-state! this
-                                           ~(into {}
-                                                  (partition 2 local-state))))}))])
+                                          ('om.next/react-set-state! this local-state))
+                                       :component-did-unmount
+                                       `(fn [this]
+                                          ('om.next/react-set-state! this nil))}))])
   `(om.next/defui ~(symbol (-> name
                                 (clj-str/capitalize)
                                 (clj-str/replace #"-[a-z]" #(clj-str/upper-case (second %)))))
