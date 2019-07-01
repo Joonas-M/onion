@@ -1,5 +1,7 @@
 (ns onion.om-next.html)
 
 (defn html
-  [element attributes body]
-  `(~(symbol "om.dom" (str element)) (~'clj->js ~attributes) ~body))
+  [element void-element? attributes body]
+  (if void-element?
+    `(~(symbol "om.dom" (str element)) (~'clj->js ~attributes))
+    `(~(symbol "om.dom" (str element)) (~'clj->js ~attributes) ~body)))

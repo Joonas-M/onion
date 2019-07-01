@@ -36,8 +36,8 @@
 (defn get-state
   []
   `(def ~'om-next-get-state
-     '(fn [this# state-name#]
-        (get (om.next/get-state this#) (keyword state-name#)))))
+     '(fn [this#]
+        (om.next/get-state this#))))
 
 (defn use-element
   []

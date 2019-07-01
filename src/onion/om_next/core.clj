@@ -11,7 +11,7 @@
                                       {:component-did-mount
                                        `(fn [this]
                                           ('om.next/react-set-state! this local-state))
-                                       :component-did-unmount
+                                       :component-will-unmount
                                        `(fn [this]
                                           ('om.next/react-set-state! this nil))}))])
   `(om.next/defui ~(symbol (-> name

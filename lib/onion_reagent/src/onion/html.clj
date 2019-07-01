@@ -44,6 +44,9 @@
                                         ;"title" <--- Already defined
    "tref" "tspan" "use" "view" "vkern"])
 
+(def void-elements
+  #{"area" "base" "br" "col" "embed" "hr" "img" "input" "link" "meta" "param" "source" "track" "wbr"})
+
 (def om-next-list
   #{"a" "abbr" "address" "area" "article" "aside" "audio" "b" "base" "bdi" "bdo" "big" "blockquote"
     "body" "br" "button" "canvas" "caption" "cite" "code" "col" "colgroup" "data" "datalist"
@@ -60,13 +63,18 @@
 
 (defn create-element
   [element]
-  (let [element# (clj-str/replace element #"[A-Z]" #(str "-" (clj-str/lower-case %)))]
+  (let [element# (clj-str/replace element #"[A-Z]" #(str "-" (clj-str/lower-case %)))
+        void-element?# (void-elements element)
+        attributes_ (gensym "attributes")
+        body_ (gensym "body")]
     `(defn ~(symbol element#)
-       [~'attributes ~'body]
+       ~(if void-element?#
+          [attributes_]
+          [attributes_ body_])
        ~(case env/WRAPPER_LIBRARY
-          "reagent" (r-html/html element# 'attributes 'body)
+          "reagent" (r-html/html element# void-element?# attributes_ body_)
           "om-next" (if (om-next-list element)
-                      (on-html/html element 'attributes 'body)
+                      (on-html/html element void-element?# attributes_ body_)
                       `(throw (~'js/Error ~(str element " not supported by om-next"))))
          :else :foo))))
 

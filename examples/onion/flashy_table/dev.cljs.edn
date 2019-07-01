@@ -1,3 +1,4 @@
 ^{:watch-dirs ["src"]}
 {:main onion-flashy-table.core
- :optimizations :none}
+ :optimizations :none
+ :source-map true}

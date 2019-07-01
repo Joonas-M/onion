@@ -46,18 +46,20 @@
 (defmacro create-api-fn
   [fn-name]
   (case env/WRAPPER_LIBRARY
-    "reagent"  ((var (symbol "onion.reagent.api" fn-name)))
+    "reagent"  (.invoke (eval (symbol "onion.reagent.api" fn-name)))
      "om-next" ((eval (symbol "onion.om-next.api" fn-name)))
      `(def ~(symbol fn-name)
         (fn [& ~'args]
           (throw ('js/Error. (str fn-name " not defined for " env/WRAPPER_LIBRARY
-                                 ". Please, report this bug."))))))
-#_  `(defn ~(symbol quo)
-     [& args#]
-     (case env/WRAPPER_LIBRARY
-       "reagent"  `(apply (eval ~(symbol (str "reagent-" quo))) args#)
-       "om-next" `(apply (eval ~(symbol (str "om-next-" quo))) args#)
-       `(apply (eval ~(symbol (str "empty-" quo))) args#)))) 
+                                  ". Please, report this bug.")))))))
+
+(defmacro use-element
+  [element-name & args]
+  (case env/WRAPPER_LIBRARY
+    "reagent"  (reagent-api/use-element element-name args)
+     "om-next" (om-next-api/use-element element-name args)
+     `(throw ('js/Error. (str "use-element not defined for " env/WRAPPER_LIBRARY
+                              ". Please, report this bug.")))))
 
 #_(defn- create-fns
   [sym]

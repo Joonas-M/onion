@@ -13,8 +13,8 @@
   []
   `(def ~'set-state!
      (fn [this# new-state#]
-       (-> this# .-cljsState (set! local-state))
-       (reagent.core/force-update! this#))))
+       (-> this# .-cljsState (set! new-state#))
+       (reagent.core/force-update this#))))
 
 (defn set-state-no-render!
   []
@@ -28,17 +28,15 @@
      (fn [this# update-fn# & args#]
        (let [old-state# (.-cljsState this#)]
          (-> this# .-cljsState (set! (apply update-fn# old-state# args#)))
-         (reagent.core/force-update! this#)))))
+         (reagent.core/force-update this#)))))
 
 (defn get-state
   []
   `(def ~'get-state
-     (fn [this# state-name#]
+     (fn [this#]
        (.-cljsState this#))))
 
 (defn use-element
-  []
-  `(def ~'use-element
-     (fn [element-name# & params#]
-        (into []
-              (apply element-name# params#)))))
+  [element-name# args#]
+  (into []
+        (cons element-name# args#)))
